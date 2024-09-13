@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
 }
 
 fun show(num1: Int, num2: Int) : Unit { //If function Unit(void) you dont need to write function type
-    println("Ypu entered $num1 and $num2")
+    println("You entered $num1 and $num2")
 }
 
 fun add(num1: Int, num2: Int) : Int{
