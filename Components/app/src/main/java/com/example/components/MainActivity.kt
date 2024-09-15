@@ -2,6 +2,7 @@ package com.example.components
 
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,8 @@ class MainActivity : AppCompatActivity() {
     //2 ways to describe varible
     var myText : TextView? = null
     lateinit var myText2 : TextView
+
+    lateinit var myDoMagicButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         myText = findViewById(R.id.textExample)
         myText2 = findViewById(R.id.textExample2)
 
+        myDoMagicButton = findViewById(R.id.doMagicButton)
+
         myText2.setTextColor(Color.BLACK)
         //myText2.text = "This is an example"
         myText2.setText("This is an example")
@@ -34,6 +39,11 @@ class MainActivity : AppCompatActivity() {
         myText2.setOnClickListener {
             myText2.setBackgroundColor(Color.BLACK)
             myText2.setTextColor(Color.WHITE)
+        }
+
+        myDoMagicButton.setOnClickListener {
+            myDoMagicButton.setBackgroundColor(Color.BLUE)
+            myText2.setText("I have done my magic")
         }
     }
 }
