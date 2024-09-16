@@ -3,6 +3,7 @@ package com.example.components
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var myText2 : TextView
 
     lateinit var myDoMagicButton : Button
+
+    lateinit var nameInput : EditText
+    lateinit var ok : Button
+    lateinit var result : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +37,15 @@ class MainActivity : AppCompatActivity() {
 
         myDoMagicButton = findViewById(R.id.doMagicButton)
 
+        nameInput = findViewById(R.id.editTextName)
+        ok = findViewById(R.id.buttonOk)
+        result = findViewById(R.id.textViewResult)
+
+        ok.setOnClickListener {
+            var username : String = nameInput.text.toString()
+            result.setText(username)
+        }
+
         myText2.setTextColor(Color.BLACK)
         //myText2.text = "This is an example"
         myText2.setText("This is an example")
@@ -45,5 +59,6 @@ class MainActivity : AppCompatActivity() {
             myDoMagicButton.setBackgroundColor(Color.BLUE)
             myText2.setText("I have done my magic")
         }
+
     }
 }
