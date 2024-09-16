@@ -79,6 +79,14 @@
             android:gravity="center"
             android:text="Result" />
 
+        <ImageView
+            android:id="@+id/imageViewExample"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="20dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/icardi" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

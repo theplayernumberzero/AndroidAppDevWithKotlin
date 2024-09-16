@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var nameInput : EditText
     lateinit var ok : Button
     lateinit var result : TextView
+
+    lateinit var imageExample : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +44,13 @@ class MainActivity : AppCompatActivity() {
         ok = findViewById(R.id.buttonOk)
         result = findViewById(R.id.textViewResult)
 
+        imageExample = findViewById(R.id.imageViewExample)
+
         ok.setOnClickListener {
             var username : String = nameInput.text.toString()
             result.setText(username)
+
+            imageExample.setImageResource(R.drawable.drogba)
         }
 
         myText2.setTextColor(Color.BLACK)
