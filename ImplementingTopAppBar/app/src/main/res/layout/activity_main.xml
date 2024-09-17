@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
         
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="Top App Bar"
@@ -23,7 +24,8 @@
             app:titleTextColor="?attr/colorOnPrimary"
             app:subtitleTextColor="?attr/colorOnPrimary"
             app:navigationIcon="@drawable/baseline_menu_24"
-            app:navigationIconTint="?attr/colorOnPrimary"/>
+            app:navigationIconTint="?attr/colorOnPrimary"
+            app:menu="@menu/toolbar_menu"/>
     </com.google.android.material.appbar.AppBarLayout>
     
     <TextView
