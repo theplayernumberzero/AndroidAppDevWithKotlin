@@ -13,8 +13,8 @@ import de.hdodenhof.circleimageview.CircleImageView
 class CountriesAdapter(
     var countryNameList: ArrayList<String>,
     var detailsList: ArrayList<String>,
-    var imageList: ArrayList<Int>,//For showing Toast message
-    var context: Context
+    var imageList: ArrayList<Int>,
+    var context: Context //For showing Toast message
 ) : RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
 
     class CountryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
