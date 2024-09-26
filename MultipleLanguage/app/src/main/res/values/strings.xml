@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Multiple Language</string>
+    <string name="hello">Hello World</string>
+    <string name="show_toast">Show a toast message</string>
+
+    <string name="toast">This is a toast message</string>
+</resources>
