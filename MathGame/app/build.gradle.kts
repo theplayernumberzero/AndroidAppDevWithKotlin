@@ -4,12 +4,15 @@ plugins {
 }
 
 android {
+    buildFeatures{
+        viewBinding = true
+    }
     namespace = "com.example.mathgame"
     compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.mathgame"
-        minSdk = 16
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"

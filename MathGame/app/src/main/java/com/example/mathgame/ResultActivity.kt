@@ -6,34 +6,38 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.mathgame.databinding.ActivityMainBinding
+import com.example.mathgame.databinding.ActivityResultBinding
 
-class MainActivity : AppCompatActivity() {
+class ResultActivity : AppCompatActivity() {
 
-    lateinit var mainBinding: ActivityMainBinding
+    lateinit var resultBinding : ActivityResultBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        mainBinding = ActivityMainBinding.inflate(layoutInflater)
-        val view = mainBinding.root
+        resultBinding = ActivityResultBinding.inflate(layoutInflater)
+        val view = resultBinding.root
         setContentView(view)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        mainBinding.buttonAdd.setOnClickListener {
-            val intent = Intent(this@MainActivity, GameActivity::class.java)
+
+        val score = intent.getIntExtra("score",0)
+        resultBinding.textViewResult.text = "Your Score: " + score
+
+        resultBinding.buttonAgain.setOnClickListener {
+
+            val intent = Intent(this@ResultActivity, MainActivity::class.java)
             startActivity(intent)
+            finish()    //close old activity
         }
 
-        mainBinding.buttonSub.setOnClickListener {
-            val intent = Intent(this@MainActivity, SubtractionActivity::class.java)
-            startActivity(intent)
-        }
+        resultBinding.buttonExit.setOnClickListener {
 
-        mainBinding.buttonMulti.setOnClickListener {
-            val intent = Intent(this@MainActivity, MultiplactionActivity::class.java)
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_HOME)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
     }
