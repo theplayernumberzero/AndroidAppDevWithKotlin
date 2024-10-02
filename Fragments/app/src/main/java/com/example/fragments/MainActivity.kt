@@ -1,6 +1,7 @@
 package com.example.fragments
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -9,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
 class MainActivity : AppCompatActivity() {
+    lateinit var replace : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -19,6 +21,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        replace = findViewById(R.id.buttonReplace)
+
         val fragmentManager : FragmentManager = supportFragmentManager
         val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
 
@@ -26,5 +30,17 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.add(R.id.frame, firstFragment)
 
         fragmentTransaction.commit()
+
+        replace.setOnClickListener {
+            val secondFragmentManager : FragmentManager = supportFragmentManager
+            val secondFragmentTransaction : FragmentTransaction = secondFragmentManager.beginTransaction()
+
+            val secondFragment = SecondFragment()
+
+            secondFragmentTransaction.replace(R.id.frame, secondFragment)
+            secondFragmentTransaction.addToBackStack(null)
+            secondFragmentTransaction.commit()
+
+        }
     }
 }
