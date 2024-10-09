@@ -6,14 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.flagquizapp.R
+import com.example.flagquizapp.databinding.FragmentResultBinding
 
 class FragmentResult : Fragment() {
+    lateinit var fragmentResultBinding: FragmentResultBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result, container, false)
-    }
+        fragmentResultBinding = FragmentResultBinding.inflate(inflater,container,false)
 
+        fragmentResultBinding.buttonNewQuiz.setOnClickListener {
+
+        }
+
+        fragmentResultBinding.buttonExit.setOnClickListener {
+
+        }
+        // Inflate the layout for this fragment
+        return fragmentResultBinding.root
+    }
 }
