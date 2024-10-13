@@ -61,7 +61,7 @@ class FragmentQuiz : Fragment() {
         fragmentQuizBinding.buttonNext.setOnClickListener {
             questionNumber++
 
-            if (questionNumber < 9){
+            if (questionNumber > 9){
                 if (!optionControl){
                     emptyNumber++
                 }
@@ -80,6 +80,7 @@ class FragmentQuiz : Fragment() {
                 if (!optionControl){
                     emptyNumber++
                     fragmentQuizBinding.textViewEmpty.text = emptyNumber.toString()
+                    setButtonToInitialProperties()
                 }else{
                     setButtonToInitialProperties()
                 }
@@ -148,8 +149,8 @@ class FragmentQuiz : Fragment() {
             fragmentQuizBinding.buttonC.isClickable = false
             fragmentQuizBinding.buttonD.isClickable = false
 
-            optionControl = true
         }
+        optionControl = true
     }
 
     private fun setButtonToInitialProperties(){

@@ -13,8 +13,9 @@ class FragmentResult : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentResultBinding = FragmentResultBinding.inflate(inflater,container,false)
+
 
         fragmentResultBinding.buttonNewQuiz.setOnClickListener {
 
