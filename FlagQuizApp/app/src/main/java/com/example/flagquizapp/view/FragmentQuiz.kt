@@ -1,10 +1,14 @@
 package com.example.flagquizapp.view
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.flagquizapp.R
 import com.example.flagquizapp.database.FlagsDao
 import com.example.flagquizapp.databinding.FragmentQuizBinding
@@ -26,6 +30,8 @@ class FragmentQuiz : Fragment() {
     lateinit var correctFlag : FlagsModel
 
     var wrongFlags = ArrayList<FlagsModel>()
+
+    var optionControl = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,19 +44,47 @@ class FragmentQuiz : Fragment() {
 
         fragmentQuizBinding.buttonA.setOnClickListener {
 
+            answerControl(fragmentQuizBinding.buttonA)
         }
         fragmentQuizBinding.buttonB.setOnClickListener {
 
+            answerControl(fragmentQuizBinding.buttonB)
         }
         fragmentQuizBinding.buttonC.setOnClickListener {
 
+            answerControl(fragmentQuizBinding.buttonC)
         }
         fragmentQuizBinding.buttonD.setOnClickListener {
 
+            answerControl(fragmentQuizBinding.buttonD)
         }
         fragmentQuizBinding.buttonNext.setOnClickListener {
             questionNumber++
-            showData()
+
+            if (questionNumber < 9){
+                if (!optionControl){
+                    emptyNumber++
+                }
+
+                val direction = FragmentQuizDirections.actionFragmentQuizToFragmentResult().apply {
+                    correct = correctNumber
+                    wrong = wrongNumber
+                    empty = emptyNumber
+                }
+                this.findNavController().navigate(direction)
+                this.findNavController().popBackStack(R.id.fragmentResult, false)
+
+                //Toast.makeText(requireActivity(), "The quiz is finished", Toast.LENGTH_SHORT).show()
+            }else{
+                showData()
+                if (!optionControl){
+                    emptyNumber++
+                    fragmentQuizBinding.textViewEmpty.text = emptyNumber.toString()
+                }else{
+                    setButtonToInitialProperties()
+                }
+            }
+            optionControl = false
         }
 
         // Inflate the layout for this fragment
@@ -85,5 +119,59 @@ class FragmentQuiz : Fragment() {
         fragmentQuizBinding.buttonB.text = options[1].countryName
         fragmentQuizBinding.buttonC.text = options[2].countryName
         fragmentQuizBinding.buttonD.text = options[3].countryName
+    }
+
+    private fun answerControl(button : Button){
+        val clickedButton = button.text.toString()
+        val correctAnswer = correctFlag.countryName
+
+        if (clickedButton == correctAnswer){
+            correctNumber++
+            fragmentQuizBinding.textViewCorrect.text = correctNumber.toString()
+            button.setBackgroundColor(Color.GREEN)
+        }else{
+            wrongNumber++
+            fragmentQuizBinding.textViewWrong.text = wrongNumber.toString()
+            button.setBackgroundColor(Color.RED)
+            button.setTextColor(Color.WHITE)
+
+            when(correctAnswer){
+
+                fragmentQuizBinding.buttonA.text -> fragmentQuizBinding.buttonA.setBackgroundColor(Color.GREEN)
+                fragmentQuizBinding.buttonB.text -> fragmentQuizBinding.buttonB.setBackgroundColor(Color.GREEN)
+                fragmentQuizBinding.buttonC.text -> fragmentQuizBinding.buttonC.setBackgroundColor(Color.GREEN)
+                fragmentQuizBinding.buttonD.text -> fragmentQuizBinding.buttonD.setBackgroundColor(Color.GREEN)
+            }
+
+            fragmentQuizBinding.buttonA.isClickable = false
+            fragmentQuizBinding.buttonB.isClickable = false
+            fragmentQuizBinding.buttonC.isClickable = false
+            fragmentQuizBinding.buttonD.isClickable = false
+
+            optionControl = true
+        }
+    }
+
+    private fun setButtonToInitialProperties(){
+        fragmentQuizBinding.buttonA.apply {
+            setBackgroundColor(Color.WHITE)
+            setTextColor(resources.getColor(R.color.pink, requireActivity().theme))
+            isClickable = true
+        }
+        fragmentQuizBinding.buttonB.apply {
+            setBackgroundColor(Color.WHITE)
+            setTextColor(resources.getColor(R.color.pink, requireActivity().theme))
+            isClickable = true
+        }
+        fragmentQuizBinding.buttonC.apply {
+            setBackgroundColor(Color.WHITE)
+            setTextColor(resources.getColor(R.color.pink, requireActivity().theme))
+            isClickable = true
+        }
+        fragmentQuizBinding.buttonD.apply {
+            setBackgroundColor(Color.WHITE)
+            setTextColor(resources.getColor(R.color.pink, requireActivity().theme))
+            isClickable = true
+        }
     }
 }
